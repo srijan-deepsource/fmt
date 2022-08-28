@@ -3,6 +3,7 @@
 # normalized (with most-significant bit equal to 1) significands in hexadecimal.
 
 from __future__ import print_function
+import sys
 
 min_exponent = -348
 max_exponent = 340
@@ -35,7 +36,7 @@ for i, exp in enumerate(range(min_exponent, max_exponent + 1, step)):
     precision = len('{}'.format(expected)) - len('{}'.format(actual - expected))
     if precision < 19:
         print('low precision:', precision)
-        exit(1)
+        sys.exit(1)
 
 print('Significands:', end='')
 for i, fp in enumerate(powers):

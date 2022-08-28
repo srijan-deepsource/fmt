@@ -4,6 +4,7 @@
 from __future__ import print_function
 import errno, os, shutil, subprocess, sys, urllib
 from subprocess import call, check_call, Popen, PIPE, STDOUT
+import sys
 
 def rmtree_if_exists(dir):
     try:
@@ -24,12 +25,12 @@ branch = os.environ['GITHUB_REF']
 is_ci = 'CI' in os.environ
 if is_ci and branch != 'refs/heads/master':
     print('Branch: ' + branch)
-    exit(0) # Ignore non-master branches
+    sys.exit(0) # Ignore non-master branches
 if is_ci and 'KEY' not in os.environ:
     # Don't update the repo if building in CI from an account that doesn't have
     # push access.
     print('Skipping update of ' + repo)
-    exit(0)
+    sys.exit(0)
 
 # Clone the fmtlib.github.io repo.
 rmtree_if_exists(repo)
